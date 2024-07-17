@@ -52,12 +52,46 @@ export class UserService {
     }
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    try {
+      const findUser = await this.userModel.find()
+      return {
+        result: findUser,
+        status: 200,
+      }
+
+    } catch (error) {
+      console.error(error)
+      return {
+        message: 'Ocorreu um erro ao tentar listar os usuários',
+        status: 500,
+      }
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    try {
+      const findUser = await this.userModel.find({_id: id})
+
+      if (findUser.length === 0) {
+        return {
+          message: 'Usuário não encontrado',
+          status: 400,
+        }
+      }
+
+      return {
+        result: findUser,
+        status: 200,
+      }
+
+    } catch (error) {
+      console.error(error)
+      return {
+        message: 'Ocorreu um erro ao tentar encontrar o usuário',
+        status: 500,
+      }
+    }
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

@@ -15,13 +15,15 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll(@Res() response: Response) {
+    const result = await this.userService.findAll();
+    return response.status(result.status).json(result);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() response: Response) {
+    const result = await this.userService.findOne(id);
+    return response.status(result.status).json(result);
   }
 
   @Patch(':id')
