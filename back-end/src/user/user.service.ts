@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import User from 'src/schemas/user';
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UserService {
@@ -30,10 +31,12 @@ export class UserService {
         }
       }
 
+      const hashingPassword = await bcrypt.hash(createUserDto.password, 10)
+
       const createUser = await this.userModel.create({
         name: createUserDto.name,
         email: createUserDto.email,
-        password: createUserDto.password,
+        password: hashingPassword,
         nickname: createUserDto.nickname,
       })
       const result = await createUser.save()
@@ -94,11 +97,56 @@ export class UserService {
     }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    try {
+      const findUser = await this.userModel.find({_id: id})
+
+      if (findUser.length === 0) {
+        return {
+          message: 'Usuário não encontrado',
+          status: 400,
+        }
+      }
+
+      await this.userModel.updateOne({_id: id}, updateUserDto)
+      
+      return {
+        message: 'Dados atualizados com sucesso.',
+        status: 200,
+      }
+      
+    } catch (error) {
+      console.error(error)
+      return {
+        message: 'Ocorreu um erro ao tentar atualizar os dados do usuário',
+        status: 500,
+      }
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    try {
+      const findUser = await this.userModel.find({_id: id})
+
+      if (findUser.length === 0) {
+        return {
+          message: 'Usuário não encontrado',
+          status: 400,
+        }
+      }
+
+      await this.userModel.deleteOne({_id: id})
+      return{
+        message: 'Usuário excluído com sucesso.',
+        status: 200,
+      }
+
+    } catch (error) {
+      console.log(error)
+      return{
+        message: 'Ocorreu um erro ao tentar excluir o usuário',
+        status: 500,
+      }
+    }
   }
 }
