@@ -43,6 +43,7 @@
           class="vForm_btn" 
           variant='outlined'
           color="success"
+          @click="router.push('/register')"
         >Cadastra-se</v-btn>
 
         <a href="">Esqueci minha senha.</a>
@@ -67,10 +68,10 @@ import Alert from '@/components/Alert.vue';
   const validationSchema = toTypedSchema(
     z.object({
       email: z
-      .string({required_error: 'Informe seu email.', invalid_type_error: 'Informe seu email'})
-      .min(1, {message: 'Informe seu email.'})
-      .email({message: 'Informe um email válido.'})
-      .endsWith('@gmail.com', {message: 'Email válido'}),
+        .string({required_error: 'Informe seu email.', invalid_type_error: 'Informe seu email'})
+        .min(1, {message: 'Informe seu email.'})
+        .email({message: 'Informe um email válido.'})
+        .endsWith('@gmail.com', {message: 'Email válido'}),
       senha: z
         .string({required_error: 'Digite sua senha.', invalid_type_error: 'Digite sua senha'})
         .min(1, {message: 'Digite sua senha.'}),
