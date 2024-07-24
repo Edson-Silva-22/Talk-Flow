@@ -1,6 +1,8 @@
 <template>
   <v-app>
     <v-main class="main">
+      <Alert/>
+
       <v-form class="vForm" @submit="login">
         <h1 class="vForm_title">Login</h1>
 
@@ -21,7 +23,9 @@
           placeholder="Digite sua senha"
           class="vForm_textField"
           variant="solo"
-          append-inner-icon="mdi-eye"
+          @click:append-inner="viewPassword = !viewPassword"
+          :append-inner-icon="viewPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="viewPassword ? 'text' : 'password'"
           clearable
           v-model="senha"
           :errorMessages="errors.senha"
@@ -31,6 +35,8 @@
           class="vForm_btn"
           color="success"
           type="submit"
+          @click="login"
+          :loading="loading"
         >Entrar</v-btn>
 
         <v-btn 
@@ -39,17 +45,25 @@
           color="success"
         >Cadastra-se</v-btn>
 
-        <a href="">Esquieci minha senha.</a>
+        <a href="">Esqueci minha senha.</a>
       </v-form>
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod'
+import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
+import Alert from '@/components/Alert.vue';
 
+  const viewPassword = ref(false)
+  const loading = ref(false)
+  const router = useRouter();
+  const authStore = useAuthStore();
   const validationSchema = toTypedSchema(
     z.object({
       email: z
@@ -64,12 +78,24 @@ import * as z from 'zod'
   )
 
   const { handleSubmit, errors } = useForm({ validationSchema });
-
   const { value: email } = useField('email')
   const { value: senha } = useField('senha')
 
+  const sleep = (time:number) => new Promise((resolve) => {
+    setTimeout(resolve, time)
+  })
+
   const login = handleSubmit(async (values) => {
-    console.log(values)
+    loading.value = true
+    await sleep(2000)
+    const response = await authStore.login(values)
+
+    if (response.status === 200) {
+      loading.value = false
+      router.push('/')
+    }
+
+    loading.value = false
   })
 
 </script>
