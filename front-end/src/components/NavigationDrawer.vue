@@ -3,10 +3,10 @@
     permanent
     :rail="display.width.value <= 500"
     :class="display.width.value <= 500 ? 'navigation-drawer-mobile' : 'navigation-drawer'"
-    location="bottom"
+    :location="display.width.value <= 500 ? 'bottom' : 'left'"
   >
     <v-list 
-      :class="display.width.value <= 500 ? 'd-flex pa-0' : ''"
+      :class="display.width.value <= 500 ? 'vListMobile' : ''"
     >
       <v-list-item 
         v-for="(item, index) in itemsMenu"
@@ -16,8 +16,9 @@
         :key="index"
         height="64"
         :to="item.route"
+        :class="display.width.value <= 500 ? 'vListItemMobile' : ''"
       >
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <v-list-item-title v-show="display.width.value > 500">{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
