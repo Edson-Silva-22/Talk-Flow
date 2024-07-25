@@ -89,15 +89,17 @@ import { ref } from 'vue';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod'
-import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import Alert from '@/components/Alert.vue';
+import { useUserStore } from '@/stores/user'
+import { useAlertStore } from '@/stores/alert'
 
   const viewPassword = ref(false)
   const viewConfirmPassword = ref(false)
   const loading = ref(false)
   const router = useRouter();
-  const authStore = useAuthStore();
+  const alertStore = useAlertStore();
+  const userStore = useUserStore();
   const validationSchema = toTypedSchema(
     z.object({
       name: z
@@ -113,7 +115,11 @@ import Alert from '@/components/Alert.vue';
         .min(1, {message: 'Digite sua senha.'}),
       confirmPassword: z
         .string({required_error: 'Confirme sua senha.', invalid_type_error: 'Confirme sua senha'})
-        .min(1, {message: 'Confirme sua senha.'}),
+        .min(1, {message: 'Confirme sua senha.'})
+        .refine((value) => value === password.value, {
+          message: 'As senhas devem ser iguais.',
+          path: ['confirmPassword']
+        }),
       nickname: z
         .string({required_error: 'Informe seu apelido.', invalid_type_error: 'Informe seu apelido'})
         .min(1, {message: 'Informe seu apelido.'}),
@@ -128,7 +134,21 @@ import Alert from '@/components/Alert.vue';
   const { value: nickname } = useField('nickname')
 
   const register = handleSubmit(async (values) => {
-    console.log(values)
+    loading.value = true;
+    const response = await userStore.create({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      nickname: values.nickname,
+    })
+
+    if (response.status == 201) {
+      loading.value = false;
+      alertStore.createAlert('Cadastro realizado com sucesso.', 'success')
+      router.push('/login')
+    }
+
+    loading.value = false;
   })
 
 </script>
