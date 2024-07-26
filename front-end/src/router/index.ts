@@ -22,6 +22,13 @@ const routes = [
         name: 'Home',
         meta: { requiresAuth: true },
         component: () => import('@/pages/home.vue')
+      },
+
+      {
+        path: '/conversations',
+        name: 'conversations',
+        meta: { requiresAuth: true },
+        component: () => import('@/pages/conversations.vue')
       }
     ]
   },

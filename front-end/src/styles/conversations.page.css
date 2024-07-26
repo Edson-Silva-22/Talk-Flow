@@ -1,0 +1,69 @@
+.container{
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+}
+
+.containerMobile{
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+  padding-bottom: 64px;
+}
+
+.conversations{
+  width: 40%;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+.messagesContainer{
+  width: 60%;
+  background-color: rebeccapurple;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+.vCard{
+  background-color: #0c1323;
+  height: 100px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  margin: 10px auto;
+  cursor: pointer;
+}
+
+.divAvatar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+}
+
+.divMessage{
+  width: calc(100% - 140px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.divBadge{
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.divBadge > p {
+  font-size: 13px;
+  color: #d2d7e6;
+}
+
+.v-badge :deep(span){
+  position: relative;
+  bottom: 0 !important;
+  left: 0 !important;
+}

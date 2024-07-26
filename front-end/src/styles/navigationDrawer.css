@@ -2,6 +2,7 @@
   border: none;
   background-color: #0c1323;
   color: #d2d7e6;
+  position: fixed !important;
 }
 
 .navigation-drawer-mobile{
@@ -12,7 +13,7 @@
   color: #d2d7e6;
   padding: 0 !important;
   margin: 0 !important;
-  overflow: hidden !important;
+  position: fixed !important;
 }
 
 .vListMobile{
