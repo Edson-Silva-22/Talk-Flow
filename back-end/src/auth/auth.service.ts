@@ -74,7 +74,7 @@ export class AuthService {
           valid: false,
           user: {}
         },
-        status: 401
+        status: 200
       }
     }
   }

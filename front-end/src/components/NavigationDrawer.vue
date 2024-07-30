@@ -1,12 +1,12 @@
 <template>
   <v-navigation-drawer
     permanent
-    :rail="display.width.value <= 600"
-    :class="display.width.value <= 600 ? 'navigation-drawer-mobile' : 'navigation-drawer'"
-    :location="display.width.value <= 600 ? 'bottom' : 'left'"
+    :rail="display.width.value <= 920"
+    :class="display.width.value <= 920 ? 'navigation-drawer-mobile' : 'navigation-drawer'"
+    :location="display.width.value <= 920 ? 'bottom' : 'left'"
   >
     <v-list 
-      :class="display.width.value <= 600 ? 'vListMobile' : ''"
+      :class="display.width.value <= 920 ? 'vListMobile' : ''"
     >
       <v-list-item 
         v-for="(item, index) in itemsMenu"
@@ -16,9 +16,9 @@
         :key="index"
         height="64"
         :to="item.route"
-        :class="display.width.value <= 600 ? 'vListItemMobile' : ''"
+        :class="display.width.value <= 920 ? 'vListItemMobile' : ''"
       >
-        <v-list-item-title v-show="display.width.value > 600">{{ item.title }}</v-list-item-title>
+        <v-list-item-title v-show="display.width.value > 920">{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
