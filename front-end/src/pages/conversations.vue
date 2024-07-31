@@ -89,6 +89,7 @@
         <v-btn 
           color="success" 
           icon="mdi-send"
+          @click="createMessage"
         ></v-btn>
       </div>
     </div>
@@ -97,9 +98,43 @@
 
 <script lang="ts" setup>
 import { useDisplay } from 'vuetify';
+import socketClient from '@/plugins/socketClient';
+import { useAuthStore } from '@/stores/auth';
 
   const display = useDisplay();
+  const authStore = useAuthStore();
 
+  async function joinRoom() {
+    socketClient.socket('/messages').emit('joinRoom', authStore.userAuth?._id);
+  }
+
+  async function createMessage() {  
+    const today = new Date()
+    socketClient.socket('/messages').emit('createMessage', {
+      sender: authStore.userAuth?._id,
+      receiver: '66aa9c538e32fbd87e144bdf',
+      text: 'Fala ai Edson.',
+      sendDate: today,
+    }, (response:any) => {
+      // console.log(response)
+    })
+  }
+
+  async function findAllMessages() {
+    socketClient.socket('/messages').emit('findAllMessages', authStore.userAuth?._id, (response:any) => {
+      // console.log(response)
+    })
+  }
+
+  //Uma nova mensagem é recebida
+  socketClient.socket('/messages').on('receiveMessage', (response:any) => {
+    console.log(response)
+  })
+
+  onMounted(() => {
+    findAllMessages()
+    joinRoom()
+  })
 </script>
 
 <style scoped>

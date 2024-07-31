@@ -3,14 +3,13 @@ import mongoose from "mongoose";
 export const messageSchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'users'
   },
   receiver: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'users'
   },
   text: String,
-  file: String,
   sendDate: Date,
 }, {timestamps: true})
 

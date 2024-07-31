@@ -5,14 +5,15 @@ import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MessagesModule } from './messages/messages.module';
 import { AuthModule } from './auth/auth.module';
-import { APP_GUARD } from '@nestjs/core';
+import { ConversationsModule } from './conversations/conversations.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/talkFlow'),
     UserModule,
     MessagesModule,
-    AuthModule
+    AuthModule,
+    ConversationsModule
   ],
   controllers: [AppController],
   providers: [

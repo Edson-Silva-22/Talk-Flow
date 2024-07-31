@@ -5,7 +5,12 @@ import { ref } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
   const loggedUser = ref()
-  const userAuth = ref<any | null>(null)
+  const userAuth = ref<{
+    _id: string,
+    name: string,
+    email: string,
+    nickname: string
+  } | null>(null)
 
   async function login(dados:any) {
     const response = await useApi('post', 'auth/login', dados)
