@@ -1,0 +1,35 @@
+.navigation-drawer{
+  border: none;
+  background-color: #0c1323;
+  color: #d2d7e6;
+  position: fixed !important;
+}
+
+.navigation-drawer-mobile{
+  width: 100%;
+  height: 62px !important;
+  border: none;
+  background-color: #0c1323;
+  color: #d2d7e6;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: fixed !important;
+}
+
+.vListMobile{
+  padding: 0 !important;
+  display: flex;
+  margin: 0;
+  height: 100%;
+}
+
+.vListMobile :deep(a) {
+  padding: 0%;
+  width: calc(100% / 3);
+  display: flex;
+  justify-content: center;
+}
+
+.vListMobile :deep(.v-list-item__spacer){
+  display: none !important;
+}

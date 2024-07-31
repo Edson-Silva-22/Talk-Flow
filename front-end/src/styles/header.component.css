@@ -1,0 +1,11 @@
+.header{
+  background-color: #080c16 !important;
+  height: 62px;
+  position: fixed !important;
+}
+
+.header-logo{
+  font-size: 20px;
+  font-weight: 600;
+  color: #d2d7e6;
+}

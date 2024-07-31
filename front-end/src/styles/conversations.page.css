@@ -1,0 +1,152 @@
+.container{
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+}
+
+.containerMobile{
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+  padding-bottom: 64px;
+}
+
+.conversations{
+  width: 40%;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+.search{
+  background-color: rgb(28,48,94);
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 5px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 30px auto; 
+}
+
+.search > input {
+  outline: none;
+}
+
+.vCard{
+  background-color: #0c1323;
+  height: 100px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  margin: 10px auto;
+  cursor: pointer;
+}
+
+.divAvatar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+}
+
+.divMessage{
+  width: calc(100% - 140px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.divMessage > p {
+  text-overflow: ellipsis;
+}
+
+.divBadge{
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.divBadge > p {
+  font-size: 13px;
+  color: #a7abb6;
+}
+
+.v-badge :deep(span){
+  position: relative;
+  bottom: 0 !important;
+  left: 0 !important;
+}
+
+.messagesContainer{
+  width: 60%;
+  position: relative;
+}
+
+.messagesHeader{
+  height: 62px;
+  width: 100%;
+  background-color: #0c1323;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.userContent > p{
+  font-size: 18px;
+}
+
+.userContent > span{
+  color: #a7abb6;
+  font-size: 14px;
+}
+
+.messagesList {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 124px);
+  overflow-y: scroll;
+}
+
+.messageItem {
+  background: rgb(48, 117, 51);
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+  max-width: 400px;
+  border-radius: 5px;
+}
+
+.messageItem > span {
+  font-size: 12px;
+  color: #a7abb6;
+}
+
+.messagesFooter{
+  height: 62px;
+  background-color: #0c1323;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.messagesFooter > input {
+  outline: none;
+  background-color: rgb(28,48,94);
+  width: calc(100% - 48px);
+  height: 100%;
+  max-width: 500px;
+  padding: 0 10px;
+  border-radius: 5px;
+}
